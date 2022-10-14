@@ -9,16 +9,28 @@ const ROUND_TIE_MESSAGE = "It's A Tie";
 const GAME_WIN_MESSAGE = "Player wins the game";
 const GAME_LOSE_MESSAGE = "%cComputer wins the game";
 const GAME_TIE_MESSAGE = "%cGame ended in a tie";
+const ROUNDS_IN_GAME = 5;
 
 let playerScore = 0;
 let computerScore = 0;
 game();
 
-
+/**
+ * Simulate a computer chosing between Rock,Paper and Scissors.
+ * 
+ * @returns one of the Strings inside SELECTION_OPTIONS array.
+ */
 function computerPlay(){
-    return SELECTION_OPTIONS[Math.floor(Math.random() * 3)];
+    return SELECTION_OPTIONS[Math.floor(Math.random() * SELECTION_OPTIONS.length)];
 }
 
+/**
+ * Simulate a single round of Rock,Paper and Scissors against the computer. Update the score accordingly.
+ * 
+ * @param {string} playerSelection Selection of Rock,Paper or Scissors made by the user.
+ * @param {string} computerSelection Selection of Rock,Paper or Scissors made by the computer.
+ * @returns A String expressing the player's round result.
+ */
 function playRound(playerSelection, computerSelection){
 
     console.log(`Player: ${playerSelection}, Computer: ${computerSelection}`);
@@ -37,19 +49,25 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+/**
+ * Simulate 5 rounds Rock,Paper or Scissors. Declare the overall player game result.
+ * @returns A String expressing the player's game result.
+ */
 function game(){
     let playerInput;
     let playerSelection= undefined;
 
     console.log(WELCOME_MESSAGE, "color:aqua");
-    for (let i=0; i<5; i++){
+    for (let i=0; i<ROUNDS_IN_GAME; i++){
         playerInput = prompt(`Round ${i+1}\n`+ SELECTION_MESSAGE);
 
+        //user hit the cancel button on prompt
         if (playerInput === null){
             console.log(EXIT_MESSAGE);
             return;
         }
         
+        //user entered unvalid input
         while ((playerSelection = SELECTION_OPTIONS.find(selection => selection.toLowerCase()==playerInput.trim().toLowerCase())) == undefined){
             playerInput = prompt(ERROR_MESSAGE + `Round ${i+1}\n` + SELECTION_MESSAGE);
         }
