@@ -77,7 +77,7 @@ function game(){
     }
 
     if (playerScore == computerScore){
-        console.log(GAME_TIE_MESSAGE);
+        console.log(GAME_TIE_MESSAGE, "color:yellow");
     }else if (playerScore > computerScore){
         console.log(GAME_WIN_MESSAGE, "color:green");
     }else{
